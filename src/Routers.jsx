@@ -21,6 +21,8 @@ const BasicExample = () => (
       <Route path="/senat" component={Senat}/>
       <Route path="/configurator" component={Configurator}/>
       <Route path="/order" component={Order}/>
+
+      <Footer />
     </div>
   </Router>
 );
