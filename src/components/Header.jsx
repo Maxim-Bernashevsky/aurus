@@ -8,7 +8,9 @@ class Header extends Component {
     return (
       <React.Fragment>
         <header>
-          <img className="logoText" src={logoText} />
+          <Link to="/">
+            <img className="logoText" src={logoText} />
+          </Link>
 
           <ul className="menu">
             <li><Link to="/">Home</Link></li>

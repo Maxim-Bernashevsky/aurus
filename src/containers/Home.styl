@@ -1,20 +1,37 @@
 @import "../assets/styles/"
 
-.page
-  background linear-gradient(to right, _blackDark 0%, _blackDark 49%, #ececec 100%)
+body
+  position: relative
+  text-align: center
+  color _black
+
+
+.button
+  margin-bottom: 100px
 
 .title
   text-transform uppercase
-  text-align center
   font-size _mainTitleSize
-  color _gray
+  color _black
   margin 0
   padding-top 130px
+
+.titleHome
   padding-bottom 90px
+  color _gray
 
 .logo
   width 492px
   display block
   margin 0 auto
-  padding-bottom 152px
+  padding-bottom 52px
+
+.bgHome
+  position: fixed
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  z-index: -1
+  background linear-gradient(to right, _blackDark 0%, _blackDark 49%, #ececec 100%)
 
