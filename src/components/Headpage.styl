@@ -1,0 +1,29 @@
+@import "../assets/styles/"
+
+heightGold = 78px
+topGold = 200px
+
+.headPage
+  position: relative
+  img
+    position: absolute
+
+  .goldline
+    position: absolute
+    background: url("../assets/img/goldline.png")
+    height: heightGold
+    width: 100%
+    top: topGold
+    right: 0
+
+  .imgTitle
+    font-size: _mainTitleSize
+    text-transform: uppercase
+    position: absolute
+    top: (heightGold / 2) + topGold - (_mainTitleSize / 2) - (_titleSize / 2)
+
+
+  .imgSubTitle
+    font-size: _titleSize
+    position: absolute
+    top: (heightGold / 2) + topGold - (_mainTitleSize / 2) + (_titleSize / 2)
