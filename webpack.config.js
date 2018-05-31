@@ -18,14 +18,11 @@ module.exports = {
         use: ['babel-loader']
       },
       {
-        test: /\.svg$/,
-        // test: /\.(png|jp(e*)g|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            query: { limit : 10000 }
-          }
-        ],
+        test: /\.(svg|png|jp(e*)g)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'images/[name]-[hash].[ext]'
+        },
       },
       {
         test: /\.css$/,
@@ -33,8 +30,16 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        use: extractCSS.extract([ 'css-loader', 'stylus-loader' ]) // , 'postcss-loader'
+        use: extractCSS.extract([ 'css-loader','stylus-loader' ]) // , 'postcss-loader'
       },
+      {
+        test: /\.(eot|woff|woff2|ttf)$/,
+        loader: 'url-loader?limit=30000',
+        options: {
+            name: 'fonts/[name]-[hash].[ext]',
+            limit: 50,
+        },
+      }
     ]
   },
   resolve: {

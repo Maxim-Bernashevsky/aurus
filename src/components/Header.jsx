@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/img/logo.svg';
+import logoText from '../assets/img/logo_text.png';
 import './Header.styl';
 
 class Header extends Component {
   render() {
     return (
-        <header className="App-header">
+      <React.Fragment>
+        <header>
+          <img className="logoText" src={logoText} />
 
-          <img className="App-logo" src={logo} width={190} height={190}/>
-
-          <h1 className="App-title">AURUS</h1>
-
-          <ul>
+          <ul className="menu">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/senat">Senat</Link></li>
             <li><Link to="/configurator">Configurator</Link></li>
@@ -20,6 +18,9 @@ class Header extends Component {
           </ul>
 
         </header>
+        <div className="afterLine gold" />
+        <div className="afterLine black" />
+      </React.Fragment>
     );
   }
 }
