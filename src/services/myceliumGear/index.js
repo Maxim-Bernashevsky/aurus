@@ -84,11 +84,27 @@ Order.prototype.getNextKeychainId = function() {
     this.gateway.id
   }/last_keychain_id`;
 
+
   return axios.get(proxy + url).then(({ data }) => {
     _this.keychainId = data.last_keychain_id + 1;
     return Promise.resolve(_this);
   });
 };
+
+Order.prototype.cancel = function() {
+  const _this = this;
+  const url = `https://gateway.gear.mycelium.com/gateways/${
+    this.gateway.id
+    }/orders/79b44931766a820728f72b13876e8cc686744945ed395074a5ced24f76e21f12/cancel`;
+
+  //POST /gateways/:api_gateway_id/orders/(:order_id or :payment_id)/cancel
+
+  return axios.post(url).then(({ data }) => {
+    // _this.keychainId = data.last_keychain_id + 1;
+    return Promise.resolve(_this);
+  });
+};
+
 
 const PaymentStatus = {
   Unconfirmed: 1,

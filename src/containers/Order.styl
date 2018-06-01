@@ -19,7 +19,6 @@
   margin-top 110px
   td
     padding 5px 0
-  //padding 110px 0 0
   &Label
     min-width 320px
     text-align left
@@ -29,7 +28,7 @@
 .totalPrice
   width 100%
   text-transform uppercase
-  border-top 1px solid black
+  border-top 2px solid _gray
   padding 20px 150px 20px 50px
   margin-top 45px
   font-size _titleSize
@@ -40,3 +39,45 @@
     padding-right 59px
 
 
+.blockPayment
+  display: flex
+  justify-content center
+  padding: 125px 0
+  h3
+    text-transform uppercase
+    font-weight: normal
+  .qrPay
+    width: 300px
+    img, div
+      float left
+    div
+      padding: 20px 0
+  .classicPay
+    width: 460px
+  .middleText
+    padding: 110px 75px 0
+  .priceInBtc
+    font-size: 65px
+    text-align: left
+  .addressPay
+    font-size: _titleSize
+    display: inline-block
+    border-bottom: 2px solid _black
+    padding: 2px 15px
+  .toAccount
+    text-align: left
+    padding: 45px 0 12px
+  .moreInfo
+    text-align: left
+    padding: 10px
+    div
+      text-align: center
+      margin-right: 5px
+      display: inline-block
+      width: 20px
+      height: 20px
+      border-radius: 50%
+      border: 1px solid _gray
+
+.left
+  float left
