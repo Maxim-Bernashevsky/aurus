@@ -8,8 +8,33 @@ import Headpage from "../components/Headpage";
 
 const widthCar = 600;
 
+import MyceliumGear from "../services/myceliumGear"
+import QRcode from "../services/QRcode"
+
+
 
 class Order extends Component {
+
+  componentWillMount(){
+
+    const gateway = new MyceliumGear.Gateway('b0f513c8efd69075750b8c55b5b64f1a356ad05e83d2db22eac3e4cf74f56f0d', 'gateway-secret')
+    const order   = new MyceliumGear.Order(gateway, 1000, 'ID bd') // Стоимость в рублях
+    order
+      .send()
+      .then((response) => {
+        console.dir(response.data)
+        // response.json().then((json) => {
+        //   /* More computation with object returned from Mycelium Gear. */
+        // })
+      })
+      .catch((error) => {
+        console.log('123')
+        console.error(error)
+      })
+
+  }
+
+
   render() {
     return <div className="page">
         <Headpage mainTitle="Время быть первым" width={widthCar} title="Senat" subTitle="седан">
@@ -44,7 +69,12 @@ class Order extends Component {
                 </tr>
               </tbody>
             </table>
+
+
           </div>
+
+  <QRcode text="12345" />
+
         </div>
       </div>;
   }

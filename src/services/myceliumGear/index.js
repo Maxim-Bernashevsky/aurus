@@ -1,0 +1,106 @@
+/*
+    Easy way to use Mycelium Gear's API.
+*/
+// const fetch = require("node-fetch");
+import axios from "axios";
+const XSignature = require("./x-signature");
+import proxy from "../proxy";
+
+/*
+    A Mycelium Gear Gateway class to handle creating gateways to use with orders.
+*/
+let Gateway = function(id, secret) {
+  this.id = id;
+  // this.secret = secret;
+}; // СОЗДАНИЕ ШЛЮЗА
+
+
+
+/*
+    A Mycelium Gear Order class that prepares an order to be sent to a gateway.
+    Prepare an order, but don't send it to Mycelium Gear yet.
+*/
+let Order = function(gateway, amountInSatoshi, callbackData) {
+  Object.assign(this, { gateway, amountInSatoshi, callbackData });
+};
+
+Order.prototype.prepare = function(amountInSatoshi, callbackData) {
+  this.domain = "https://gateway.gear.mycelium.com";
+  this.uri =
+    `/gateways/${this.gateway.id}/orders?` +
+    `amount=${amountInSatoshi}` +
+    `&keychain_id=${this.keychainId}` +
+    `&callback_data=${callbackData}`;
+
+  this.url = this.domain + this.uri;
+  this.method = "POST";
+
+  this.prepared = true;
+};
+
+/*
+    Send a prepared order to Mycelium Gear to be processed.
+*/
+Order.prototype.send = function() {
+  return this.getNextKeychainId().then(() => {
+    this.prepare(this.amountInSatoshi, this.callbackData);
+    return this._send();
+  });
+};
+
+Order.prototype._send = function() {
+  const _this = this;
+  if (!this.prepared) {
+    return Promise.reject("Order is not prepared!");
+  }
+
+  let headers = {};
+  Object.assign(
+    headers,
+    XSignature.sign(
+      // _this.gateway.secret,
+      _this.method,
+      _this.uri,
+      ""
+    ).toHeaders()
+  );
+
+  const orderFulfillmentRequest = axios(proxy + this.url, {
+    method: _this.method,
+    headers
+  });
+
+  /* The order has been successfully sent, the configuration is no longer valid. */
+  orderFulfillmentRequest.then(response => {
+    _this.prepared = false;
+  });
+
+  return orderFulfillmentRequest;
+};
+
+Order.prototype.getNextKeychainId = function() {
+  const _this = this;
+  const url = `https://gateway.gear.mycelium.com/gateways/${
+    this.gateway.id
+  }/last_keychain_id`;
+
+  return axios.get(proxy + url).then(({ data }) => {
+    _this.keychainId = data.last_keychain_id + 1;
+    return Promise.resolve(_this);
+  });
+};
+
+const PaymentStatus = {
+  Unconfirmed: 1,
+  PaidInFull: 2,
+  Underpaid: 3,
+  Overpaid: 4,
+  Expired: 5,
+  Canceled: 6
+};
+
+module.exports = {
+  Gateway,
+  Order,
+  PaymentStatus
+};
