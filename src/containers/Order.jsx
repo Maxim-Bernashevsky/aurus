@@ -5,11 +5,11 @@ import faChevronLeft from '@fortawesome/fontawesome-free-solid/faChevronLeft'
 import './Order.styl';
 import car from '../assets/img/senat5.png';
 import Headpage from "../components/Headpage";
+import QRcode from "../components/QRcode";
 
 const widthCar = 600;
 
 import MyceliumGear from "../services/myceliumGear"
-import QRcode from "../services/QRcode"
 
 
 
@@ -73,7 +73,8 @@ class Order extends Component {
 
           </div>
 
-  <QRcode text="12345" />
+
+          <QRcode text="12345" />
 
         </div>
       </div>;

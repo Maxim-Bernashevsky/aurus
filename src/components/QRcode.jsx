@@ -1,15 +1,3 @@
-// import React from 'react';
-// import proxy from "./proxy";
-//
-//
-// function QRcode(text, size = 100) {
-//   return
-// }
-//
-//
-// export default QRcode;
-
-
 import React, { Component } from 'react';
 
 class QRcode extends Component {
