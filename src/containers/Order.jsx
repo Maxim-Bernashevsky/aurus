@@ -27,7 +27,7 @@ class Order extends Component {
   onUpdateOrder(data) {
     console.dir(JSON.parse(data))
 
-    this.setState({order: JSON.parse(data)});
+    // this.setState({order: JSON.parse(data)});
   }
 
 

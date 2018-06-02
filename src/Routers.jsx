@@ -2,9 +2,15 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
-import { pathname } from "./common/history";
+// import { pathname, history } from "./common/history";
+
+var pathname = window.location.pathname;
+
+
+
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -14,22 +20,33 @@ import Senat from './containers/Senat';
 import Configurator from "./containers/Configurator";
 import Order from "./containers/Order";
 
+
+const RouteWhithFooter = () => (
+  <React.Fragment>
+    <Switch>
+      <Route path="/senat" component={Senat}/>
+      <Route path="/configurator" component={Configurator}/>
+      <Route path="/order" component={Order}/>
+    </Switch>
+    <Footer/>
+  </React.Fragment>
+);
+
 const Routers = () => (
   <Router>
-    <div>
+    <React.Fragment>
       <Header />
+
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/senat" component={Senat}/>
-        <Route path="/configurator" component={Configurator}/>
-        <Route path="/order" component={Order}/>
+
+        <RouteWhithFooter />
+
+        <Redirect to="/" />
+
       </Switch>
 
-      {pathname !== "/" && (
-        <Footer />
-      )}
-
-    </div>
+    </React.Fragment>
   </Router>
 );
 

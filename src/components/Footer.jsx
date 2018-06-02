@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../assets/img/logo.svg';
-import './Header.styl';
+import './Footer.styl';
 
 class Footer extends Component {
+  dateStart = 2012;
+
   render() {
+    const dateNow = new Date();
+    const yearNow = dateNow.getFullYear();
+    const showDate = this.dateStart === yearNow ? yearNow : `${this.dateStart} - ${yearNow}`;
+
     return (
-        <footer className="foo">
-
-         <h2>FOOTER</h2>
-
+        <footer>
+          <ul>
+            <li>AURUS &copy; {showDate}</li>
+            <li>Клуб AURUS</li>
+            <li>Сервис</li>
+            <li>Контакты</li>
+            <li>RU</li>
+          </ul>
         </footer>
     );
   }
