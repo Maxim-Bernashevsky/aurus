@@ -15,13 +15,13 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.(svg|png|jp(e*)g)$/,
         loader: 'file-loader',
         options: {
-          name: 'images/[name]-[hash].[ext]'
+          name: `images/[name]-[hash].[ext]`
         },
       },
       {
@@ -30,8 +30,11 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        use: extractCSS.extract([ 'css-loader','stylus-loader' ]) // , 'postcss-loader'
+        use: extractCSS.extract(
+          [ 'css-loader','stylus-loader' ] // TODO css modules
+        )
       },
+
       {
         test: /\.(eot|woff|woff2|ttf)$/,
         loader: 'url-loader?limit=30000',
@@ -47,7 +50,7 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist',
-    publicPath: '/',
+    publicPath: '',
     filename: 'bundle.js'
   },
   devServer: {

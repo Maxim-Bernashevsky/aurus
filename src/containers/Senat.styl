@@ -1,0 +1,52 @@
+@import "../assets/styles/"
+widthColumn = 384px
+offsetColumn = 62px
+
+.car
+  &Images
+    img
+      margin: 50px offsetColumn
+  &Front
+    width: widthColumn
+  &Back
+    width: 362px
+
+
+.blockInfo
+  width: 2 * widthColumn + offsetColumn * 4
+  margin: 130px auto 0
+  display: flex
+  flex-wrap wrap
+  div
+    min-width: widthColumn
+    display: inline-block
+    margin: 0 62px
+    font-size: _titleSize
+    text-align: left
+    h3
+      text-transform uppercase
+      padding-left: 40px
+      margin-top: 0
+      margin-bottom: 30px
+    ul
+      list-style none
+      li
+        margin-bottom: 30px
+
+
+.blockModels
+  margin: 80px 0 100px
+  display: flex
+  justify-content center
+  .model
+    margin: 0 30px
+    h3
+      font-weight: normal
+      text-transform uppercase
+      margin-top: 30px
+    &Wrap
+      height: 90px
+      display: flex
+      align-items flex-end
+      img
+        display: inline-block

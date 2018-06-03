@@ -5,12 +5,6 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
-// import { pathname, history } from "./common/history";
-
-var pathname = window.location.pathname;
-
-
-
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -20,29 +14,33 @@ import Senat from './containers/Senat';
 import Configurator from "./containers/Configurator";
 import Order from "./containers/Order";
 
+const DEV_MODE = true; // TODO from deploy
+const basename = DEV_MODE ? '' : "/aurus";
+const prefix = "";
 
-const RouteWhithFooter = () => (
+
+const RouteWithFooter = () => (
   <React.Fragment>
     <Switch>
-      <Route path="/senat" component={Senat}/>
-      <Route path="/configurator" component={Configurator}/>
-      <Route path="/order" component={Order}/>
+      <Route path={`${prefix}/senat`} component={Senat}/>
+      <Route path={`${prefix}/configurator`} component={Configurator}/>
+      <Route path={`${prefix}/order`} component={Order}/>
     </Switch>
     <Footer/>
   </React.Fragment>
 );
 
 const Routers = () => (
-  <Router>
+  <Router basename={basename}>
     <React.Fragment>
       <Header />
 
       <Switch>
-        <Route exact path="/" component={Home}/>
+        <Route exact path={`${prefix}/`} component={Home}/>
 
-        <RouteWhithFooter />
+        <RouteWithFooter />
 
-        <Redirect to="/" />
+        <Redirect to={`${prefix}/`} />
 
       </Switch>
 
