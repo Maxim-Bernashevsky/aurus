@@ -1,0 +1,71 @@
+@import "../assets/styles/"
+
+_afterLight()
+  content ""
+  display: inline-block
+  width: 100%
+  height: 100%
+  background: linear-gradient(145deg, rgba(255,255,255,.23) 3%, transparent 60%, transparent)
+  position: absolute
+  top: 0
+  left: 0
+
+.configurator
+  .bodyPage
+    .title
+      padding-top: 0
+    h3
+      text-align left
+      font-weight: normal
+      font-size: _titleSize
+      margin-left: 50px
+      margin-top: 45px
+      margin-bottom: 45px
+    .orderInfo
+      margin-top: 50px
+      .orderInfoValue
+        padding-right: 20px
+      .plus
+        transform rotate(45deg)
+        padding-top: 15px
+    .totalPrice .orderInfoValue
+      font-size: 65px
+    .interior
+      h3
+        margin: 140px 50px 30px
+      img
+        width: 70%
+
+    .options
+      h3
+        text-transform: uppercase
+      .plus
+        margin-left: 65px
+        margin-bottom: 75px
+    .colorCar
+      h3
+        margin-top: 0
+      .colors
+        div
+          width: 228px
+          height: 32px
+          display: inline-block
+          margin: 10px 30px
+          position: relative
+        .c
+          &Black
+            background: linear-gradient(to top, #2c2c2c, #2c2c2c 56%, #bababa)
+            &:after
+              _afterLight()
+          &White
+            background: linear-gradient(to top, #c0c0c0, #c0c0c0 44%, #ffffff)
+            &:after
+              _afterLight()
+          &Blue
+            background: linear-gradient(to top, #342a4b, #342a4b 58%, #b5acc9)
+            &:after
+              _afterLight()
+          &Red
+            background: linear-gradient(to top, #640e0f, #640e0f 54%, #efa6a6)
+            &:after
+              _afterLight()

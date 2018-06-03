@@ -77,11 +77,11 @@ class Order extends Component {
             <tbody>
               <tr>
                 <td className="orderInfoLabel">Базовая цена</td>
-                <td className="orderInfoValue">7 850 000</td>
+                <td className="orderInfoValue">7 850 000 <sub>&#8381;</sub></td>
               </tr>
               <tr>
                 <td className="orderInfoLabel">Премиальный пакет</td>
-                <td className="orderInfoValue">750 000</td>
+                <td className="orderInfoValue">750 000 <sub>&#8381;</sub></td>
               </tr>
             </tbody>
           </table>
@@ -90,7 +90,7 @@ class Order extends Component {
             <tbody>
               <tr>
                 <td className="orderInfoLabel">Итоговая цена</td>
-                <td className="orderInfoValue">8 600 000</td>
+                <td className="orderInfoValue">8 600 000 <sub>&#8381;</sub></td>
               </tr>
             </tbody>
           </table>
