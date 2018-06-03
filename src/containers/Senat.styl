@@ -2,6 +2,8 @@
 widthColumn = 384px
 offsetColumn = 62px
 
+maxWidth = 2 * widthColumn + offsetColumn * 4
+
 .car
   &Images
     img
@@ -13,8 +15,8 @@ offsetColumn = 62px
 
 
 .blockInfo
-  width: 2 * widthColumn + offsetColumn * 4
-  margin: 130px auto 0
+  width: maxWidth
+  margin: 70px auto 0
   display: flex
   flex-wrap wrap
   div
@@ -24,10 +26,11 @@ offsetColumn = 62px
     font-size: _titleSize
     text-align: left
     h3
+      font-weight: normal
       text-transform uppercase
       padding-left: 40px
       margin-top: 0
-      margin-bottom: 30px
+      margin-bottom: 35px
     ul
       list-style none
       li
@@ -50,3 +53,13 @@ offsetColumn = 62px
       align-items flex-end
       img
         display: inline-block
+
+
+.wrapButtonRight
+  margin: 15px auto 90px
+  max-width: maxWidth
+  text-align: right
+
+.wrapButtonBottom
+  margin: 105px auto 115px
+  max-width: maxWidth
