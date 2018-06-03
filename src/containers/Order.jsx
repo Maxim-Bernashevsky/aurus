@@ -65,10 +65,12 @@ class Order extends Component {
         </Headpage>
 
         <div className="bodyPage">
-          <Link to="/configurator" className="buttonBack">
-            <FontAwesomeIcon icon={faChevronLeft} size="xs" transform={{ y: 3, x: -3 }} />
-            Конфигуратор
-          </Link>
+          <div className="leftButton">
+            <Link to="/configurator" className="buttonBack">
+              <FontAwesomeIcon icon={faChevronLeft} size="xs" transform={{ y: -1, x: -3 }} />
+              Конфигуратор
+            </Link>
+          </div>
 
 
           <table className="orderInfo">

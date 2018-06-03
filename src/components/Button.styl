@@ -1,12 +1,48 @@
 @import "../assets/styles/"
 
 .button
-  background: _black
-  text-transform uppercase
+  position: relative
   display: inline-block
-  border-bottom 2px solid _gold
-  padding: 12px 25px
-  text-decoration: none
+  overflow hidden
+  cursor pointer
+  &BG
+    width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    left: 0
+    background _black
+
   a, a:visited, a:active
+    position relative
+    text-transform uppercase
+    display inline-block
+    padding 12px 25px
+    text-decoration none
     color _gray
-    text-decoration: none
+    &:after
+      _afterLine(2px)
+      background linear-gradient(to right, _black, _black 7%, _gold, _black 93%, _black)
+  &:hover div
+    opacity: 1
+
+
+.goldLight, .whiteLight
+  position: absolute
+  transform rotate(180deg)
+  width: 100%
+  height: 40px
+  margin: 0 auto
+
+.goldLight
+  background radial-gradient(ellipse closest-side at 50% 5px, rgba(214, 181, 148, .7), transparent)
+  transition opacity .28s ease-in-out
+  opacity 0
+  top 6px
+
+.whiteLight
+  background radial-gradient(ellipse closest-side at 50% 3px, rgba(255, 255, 255, .3), transparent)
+  transition opacity .17s ease-in-out
+  opacity 0
+  top 5px
+

@@ -47,7 +47,7 @@ class Senat extends Component {
         </div>
 
         <div className="wrapButtonRight">
-          <Button text="Конфигуратор" to="/senat"/>
+          <Button text="Конфигуратор" to="/configurator"/>
         </div>
 
         <div className="blockInfo">
@@ -118,7 +118,7 @@ class Senat extends Component {
         </div>
 
         <div className="wrapButtonBottom">
-          <Button text="Конфигуратор" to="/senat"/>
+          <Button text="Конфигуратор" to="/configurator"/>
         </div>
 
       </div>

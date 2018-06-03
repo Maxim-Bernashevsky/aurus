@@ -7,6 +7,9 @@ class Button extends Component {
     const {to, text} = this.props;
     return (
       <div className="button">
+        <div className="buttonBG"/>
+        <div className="goldLight" />
+        <div className="whiteLight" />
         <Link to={to}>{text}</Link>
       </div>
     );

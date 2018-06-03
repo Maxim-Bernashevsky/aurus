@@ -3,15 +3,24 @@
 .bodyPage
   max-width 1440px
   margin 0 auto
-
-
+  .leftButton
+    text-align: left
   .buttonBack
+    position: relative
     text-decoration none
     text-transform uppercase
     font-size _titleSize
-    display flex
-
-
+    display inline-block
+    text-align: left
+    padding: 5px 0
+    &:visited, &:active
+      color _black
+    &:after
+      _afterLine(2px)
+      bottom -2px
+      transition background .05s ease-in-out
+    &:hover:after
+      background: _gold
 
 .orderInfo
   border-collapse collapse
