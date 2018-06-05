@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faChevronLeft from '@fortawesome/fontawesome-free-solid/faChevronLeft'
 
 import './Order.styl';
 import car from '../assets/img/senat5.png';
@@ -67,7 +65,7 @@ class Order extends Component {
         <div className="bodyPage">
           <div className="leftButton">
             <Link to="/configurator" className="buttonBack">
-              <FontAwesomeIcon icon={faChevronLeft} size="xs" transform={{ y: -1, x: -3 }} />
+              {'<'} {/* TODO pretier */}
               Конфигуратор
             </Link>
           </div>
