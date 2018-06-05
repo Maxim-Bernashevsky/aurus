@@ -18,7 +18,7 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.(svg|png|jp(e*)g)$/,
+        test: /\.(svg|png|jp(e*)g|webp)$/,
         loader: 'file-loader',
         options: {
           name: `images/[name]-[hash].[ext]`

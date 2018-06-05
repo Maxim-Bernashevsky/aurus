@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import logoText from '../assets/img/logo_text.png';
+import logoText from '../assets/img/logo_text.jpg';
 import './Header.styl';
 
 class Header extends Component {

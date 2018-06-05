@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Home.styl';
-import logo from '../assets/img/logo.png';
+import logo from '../assets/img/logo.webp';
 import Button from "../components/Button";
 
 class Home extends Component {
