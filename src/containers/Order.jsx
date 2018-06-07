@@ -25,7 +25,7 @@ class Order extends Component {
   onUpdateOrder(data) {
     console.dir(JSON.parse(data))
 
-    // this.setState({order: JSON.parse(data)});
+    this.setState({order: JSON.parse(data)});
   }
 
 
@@ -38,6 +38,7 @@ class Order extends Component {
       .send()
       .then((response) => {
         console.dir(response.data)
+        this.setState({order: response.data});
         // response.json().then((json) => {
         //   /* More computation with object returned from Mycelium Gear. */
         // })
@@ -47,9 +48,9 @@ class Order extends Component {
         console.error(error)
       })
 
-    setTimeout(() => {
-      order.cancel()
-    }, 1000)
+    // setTimeout(() => {
+    //   order.cancel()
+    // }, 1000)
 
   }
 
@@ -121,7 +122,7 @@ class Order extends Component {
                 </div>
 
                 <Websocket
-                  url='ws://gateway.gear.mycelium.com/gateways/b0f513c8efd69075750b8c55b5b64f1a356ad05e83d2db22eac3e4cf74f56f0d/orders/333346/websocket'
+                  url='ws://gateway.gear.mycelium.com/gateways/b0f513c8efd69075750b8c55b5b64f1a356ad05e83d2db22eac3e4cf74f56f0d/orders/111/websocket'
                   onMessage={this.onUpdateOrder.bind(this)}
                 />
               </div>
