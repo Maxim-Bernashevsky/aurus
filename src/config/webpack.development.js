@@ -1,6 +1,9 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCSS = new ExtractTextPlugin('[name].css');
+const extractCSS = new ExtractTextPlugin({
+  filename: '[name]-style.css',
+  allChunks: true
+});
 
 module.exports = {
   entry: [
@@ -42,13 +45,17 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+   // minimize: false,
+  },
   resolve: {
     extensions: ['*', '.js', '.jsx']
   },
   output: {
     path: __dirname + '/dist',
     publicPath: '',
-    filename: 'bundle.js'
+    filename: '[name]-bundle.js',
+    chunkFilename: '[name].bundle.js',
   },
   devServer: {
     contentBase: './dist',

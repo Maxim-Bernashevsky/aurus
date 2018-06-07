@@ -3,7 +3,7 @@ import './Home.styl';
 import logo from '../assets/img/logo.webp';
 import Button from "../components/Button";
 
-class Home extends Component {
+class Home extends React.Component {
   render() {
     return (
       <div className="page">

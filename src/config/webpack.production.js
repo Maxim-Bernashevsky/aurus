@@ -1,7 +1,10 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCSS = new ExtractTextPlugin('[name].[hash].css');
+const extractCSS = new ExtractTextPlugin({
+  filename: '[name]-style.css',
+  allChunks: true
+});
 
 module.exports = {
   entry: [
@@ -64,7 +67,9 @@ module.exports = {
   output: {
     path: __dirname + '/../../dist',
     publicPath: '',
-    filename: 'bundle.[chunkhash].js'
+    filename: '[name]-bundle.js',
+    chunkFilename: '[name].bundle.js',
+    devtoolNamespace: '[name]',
   },
   devServer: {
     contentBase: './dist',
