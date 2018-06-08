@@ -42,17 +42,15 @@ let Order = Loadable({
   loading: LoadingComponent,
 });
 
-const DEV_MODE = true; // TODO from deploy
-const basename = DEV_MODE ? '' : "/aurus";
-const prefix = "";
-
+const NODE_ENV_PROD = process.env.NODE_ENV === 'production';
+const basename = NODE_ENV_PROD ? "/aurus" : '';
 
 const RouteWithFooter = () => (
   <React.Fragment>
     <Switch>
-      <Route path={`${prefix}/senat`} component={Senat}/>
-      <Route path={`${prefix}/configurator`} component={Configurator}/>
-      <Route path={`${prefix}/order`} component={Order}/>
+      <Route path='/senat' component={Senat}/>
+      <Route path='/configurator' component={Configurator}/>
+      <Route path='/order' component={Order}/>
     </Switch>
     <Footer/>
   </React.Fragment>
@@ -64,11 +62,11 @@ const Routers = () => (
       <Header />
 
       <Switch>
-        <Route exact path={`${prefix}/`} component={Home}/>
+        <Route exact path='/' component={Home}/>
 
         <RouteWithFooter />
 
-        <Redirect to={`${prefix}/`} />
+        <Redirect to='/' />
 
       </Switch>
 

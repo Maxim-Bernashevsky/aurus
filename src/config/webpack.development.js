@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin({
@@ -32,7 +33,7 @@ module.exports = {
       {
         test: /\.styl$/,
         use: extractCSS.extract(
-          [ 'css-loader', 'stylus-loader' ] // TODO css modules
+          [ 'css-loader', 'stylus-loader' ]
         ),
       },
       {
@@ -69,5 +70,8 @@ module.exports = {
       title: 'Dev Aurus',
     }),
     extractCSS,
-  ],
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"development"'
+    })
+  ]
 };
