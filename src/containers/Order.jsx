@@ -130,10 +130,9 @@ class Order extends Component {
             </div>
           </div>
 
-
-
-
-
+          <hr/>
+          <div>! LOADER !</div>
+          <hr/>
 
         </div>
       </div>;

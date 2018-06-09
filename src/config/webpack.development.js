@@ -10,7 +10,7 @@ module.exports = {
   entry: [
     './src/index.js'
   ],
-  mode: 'production',
+  mode: 'development',
   target: "web",
   module: {
     rules: [

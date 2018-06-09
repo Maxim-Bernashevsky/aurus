@@ -23,6 +23,9 @@ _afterLight()
       margin-bottom: 45px
     .orderInfo
       margin-top: 50px
+      .selectedOptions td
+        padding: 0 30px 0 0
+        text-align: left
       .orderInfoValue
         padding-right: 20px
       .plus
@@ -30,11 +33,10 @@ _afterLight()
         padding-top: 15px
     .totalPrice .orderInfoValue
       font-size: 65px
-    .interior
-      h3
-        margin: 140px 50px 30px
-      img
-        width: 70%
+
+    .customerForm
+      margin-top: 100px
+      margin-bottom: 160px
 
     .options
       h3
@@ -42,30 +44,82 @@ _afterLight()
       .plus
         margin-left: 65px
         margin-bottom: 75px
-    .colorCar
+    .blockColor
       h3
         margin-top: 0
       .colors
-        div
+        label
+          background: transparent
+          position: relative
+        .checkmark:after
+          transition border .1s linear
+        input
+          display: none
+          &:checked ~ .checkmark:after
+            border-radius 2px
+            width: 232px;
+            height: 40px;
+            top: -8px;
+            left: -6px;
+            border: 4px solid _gold
+        span
           width: 228px
           height: 32px
           display: inline-block
           margin: 10px 30px
           position: relative
-        .c
-          &Black
-            background: linear-gradient(to top, #2c2c2c, #2c2c2c 56%, #bababa)
+          &:after
+            _afterLight()
+            width: 232px
+            left: -3px;
+        .black span
+          background: linear-gradient(to top, #2c2c2c, #2c2c2c 56%, #bababa)
+        .white span
+          background: linear-gradient(to top, #c0c0c0, #c0c0c0 44%, #ffffff)
+        .blue span
+          background: linear-gradient(to top, #342a4b, #342a4b 58%, #b5acc9)
+        .red span
+          background: linear-gradient(to top, #640e0f, #640e0f 54%, #efa6a6)
+
+    .blockInterior
+      margin-bottom: 120px
+      h3
+        margin: 140px 50px 30px
+      .selectedInterior
+        width: 64%
+        min-width 300px
+      .interiors
+        margin-top: 7%
+        label
+          margin: 20px
+          display: flex
+          justify-content center
+          flex-wrap wrap
+          text-align: left
+          background: transparent
+          position: relative
+          .checkmark
+            display: inline-block
+            position relative
+            margin-right: 16px
+            width: 48%
+            min-width 300px
+            height: 15%
             &:after
+              transition all 1.3s linear // WTF??
+            img
+              width: 100%
+              height: 100%
+          span
+            width 180px
+            font-size: _titleSize
+          input
+            display: none
+            &:checked ~ .checkmark:after
               _afterLight()
-          &White
-            background: linear-gradient(to top, #c0c0c0, #c0c0c0 44%, #ffffff)
-            &:after
-              _afterLight()
-          &Blue
-            background: linear-gradient(to top, #342a4b, #342a4b 58%, #b5acc9)
-            &:after
-              _afterLight()
-          &Red
-            background: linear-gradient(to top, #640e0f, #640e0f 54%, #efa6a6)
-            &:after
-              _afterLight()
+              border-radius 2px
+              width: calc(100% + 4px)
+              height: calc(100% + 5px)
+              top: -8px;
+              left: -6px;
+              border: 4px solid _gold
