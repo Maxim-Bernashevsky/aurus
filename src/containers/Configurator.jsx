@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Configurator.styl';
 import Headpage from "../components/Headpage";
-import Title from "../components/Title";
 import Plus from "../components/Plus";
 
 import car from '../assets/img/senat4.png';
@@ -11,52 +10,10 @@ import rose_preview from '../assets/img/interior_rose.jpg';
 import etimoe_preview from '../assets/img/interior_etimoe.jpg';
 import { getPrice, getTextPrice } from '../common/price';
 import OrderDetails from "../components/OrderDetails";
-
-
+import {COLORS, COLOR_TEXT, INTERIORS, INTERIOR_TEXT} from '../common/CONSTANTS'
+import BlockColors from "../components/BlockColors";
 const widthCar = 820;
 
-
-const COLORS = Object.freeze({
-  BLACK:   Symbol.for("black"),
-  WHITE:  Symbol.for("white"),
-  BLUE: Symbol.for("blue"),
-  RED: Symbol.for("red")
-});
-
-const COLOR_TEXT = Object.freeze({
-  BLACK:   "Черный",
-  WHITE:  "Белый",
-  BLUE: "Синий",
-  RED: "Красный"
-});
-
-const INTERIORS = Object.freeze({
-  OLIVA: Symbol.for("oliva"),
-  ROSE: Symbol.for("rose"),
-  ETIMOE: Symbol.for("etimoe")
-});
-
-const INTERIOR_TEXT = Object.freeze({
-  OLIVA: "Оливковое дерево",
-  ROSE: "Розовое дерево",
-  ETIMOE: "Дерево этимое"
-});
-
-
-const ColorInput = (props) => {
-  const {color, onChange, checked} = props;
-  return (
-    <label className={color}>
-      <input
-        type="radio"
-        onChange={onChange}
-        checked={ checked }
-        name="color"
-      />
-      <span className="checkmark"/>
-    </label>
-  );
-};
 
 const InteriorInput = (props) => {
   const {type, selected, onChange, srcImg} = props;
@@ -143,33 +100,10 @@ class Configurator extends Component {
 
         <div className="bodyPage">
 
-          <div className="blockColor">
-            <h3>Цвет</h3>
-
-            <div className="colors">
-              <ColorInput
-                color="black"
-                checked={ color === COLORS.BLACK }
-                onChange={this.onChangeColor}
-              />
-              <ColorInput
-                color="white"
-                checked={ color === COLORS.WHITE }
-                onChange={this.onChangeColor}
-              />
-              <ColorInput
-                color="blue"
-                checked={ color === COLORS.BLUE }
-                onChange={this.onChangeColor}
-              />
-              <ColorInput
-                color="red"
-                checked={ color === COLORS.RED }
-                onChange={this.onChangeColor}
-              />
-            </div>
-          </div>
-
+          <BlockColors
+            color={color}
+            onChangeColor={this.onChangeColor}
+          />
 
           <div className="blockInterior">
             <h3>Интерьер</h3>
@@ -239,9 +173,7 @@ class Configurator extends Component {
           </div>
 
         </div>
-
       </div>
-
     );
   }
 }
