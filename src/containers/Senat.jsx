@@ -7,6 +7,7 @@ import senatSM from '../assets/img/senat_sm.jpg';
 import arsenalSM from '../assets/img/arsenal_sm.jpg';
 import comendantSM from '../assets/img/comendant_sm.jpg';
 
+import { getPrice } from '../common/price';
 
 const widthCar = 700;
 
@@ -92,6 +93,7 @@ class Senat extends Component {
               />
             </div>
             <h3>Senat</h3>
+            <span>от {getPrice.senat.base / 10e+5} млн руб</span>
           </div>
 
           <div className="model">
@@ -103,6 +105,7 @@ class Senat extends Component {
               />
             </div>
             <h3>Arsenal</h3>
+            <span>от {getPrice.arsenal.base / 10e+5} млн руб</span>
           </div>
 
           <div className="model">
@@ -114,6 +117,7 @@ class Senat extends Component {
               />
             </div>
             <h3>Comendant</h3>
+            <span>от {getPrice.comendant.base / 10e+5} млн руб</span>
           </div>
         </div>
 

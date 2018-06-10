@@ -82,28 +82,12 @@ class Order extends Component {
             </Link>
           </div>
 
-
-
           <OrderDetails
             color={getColorName(color)}
             interior={getInteriorName(interior)}
             price={this.price}
             options={options}
           />
-
-
-          {/*<table className="orderInfo">*/}
-            {/*<tbody>*/}
-              {/*<tr>*/}
-                {/*<td className="orderInfoLabel">Базовая цена</td>*/}
-                {/*<td className="orderInfoValue">7 850 000 <sub>&#8381;</sub></td>*/}
-              {/*</tr>*/}
-              {/*<tr>*/}
-                {/*<td className="orderInfoLabel">Премиальный пакет</td>*/}
-                {/*<td className="orderInfoValue">750 000 <sub>&#8381;</sub></td>*/}
-              {/*</tr>*/}
-            {/*</tbody>*/}
-          {/*</table>*/}
 
           <table className="totalPrice">
             <tbody>
