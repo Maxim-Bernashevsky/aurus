@@ -14,15 +14,19 @@ header
     width 131px
     height 23px
   .menu
-    list-style none
     display flex
     margin: 0
+    .active
+      color _gold
     a
       text-transform uppercase
       text-decoration none
       color _gray
       padding 0 16px
       font-size _titleSize
+      transition text-shadow .12s linear
+      &:hover
+        text-shadow 1px 1px 2px rgba(255,255,255,.5)
 
 .black
   height 1px
