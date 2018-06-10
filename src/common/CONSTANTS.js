@@ -23,3 +23,7 @@ export const INTERIOR_TEXT = Object.freeze({
   ROSE: "Розовое дерево",
   ETIMOE: "Дерево этимое"
 });
+
+
+export const getColorName = (color) => COLOR_TEXT[Symbol.keyFor(color).toUpperCase()];
+export const getInteriorName = (interior) => INTERIOR_TEXT[Symbol.keyFor(interior).toUpperCase()];

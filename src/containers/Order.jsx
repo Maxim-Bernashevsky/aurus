@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import OrderDetails from "../components/OrderDetails"
+import {COLORS, INTERIORS, INTERIOR_TEXT, getColorName, getInteriorName} from '../common/CONSTANTS'
+
 
 import './Order.styl';
 import car from '../assets/img/senat5.png';
@@ -11,6 +14,7 @@ import Websocket from 'react-websocket';
 const widthCar = 600;
 
 import MyceliumGear from "../services/myceliumGear"
+import {getPrice} from '../common/price';
 
 
 
@@ -18,7 +22,7 @@ class Order extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      order: null
+      order: null,
     };
   }
 
@@ -30,6 +34,13 @@ class Order extends Component {
 
 
   componentWillMount(){
+    this.price = getPrice.senat;
+    this.setState({
+      color: COLORS.BLACK,
+      interior: INTERIORS.OLIVA,
+      options: ["premiumPack"]
+    });
+
 
     const gateway = new MyceliumGear.Gateway('b0f513c8efd69075750b8c55b5b64f1a356ad05e83d2db22eac3e4cf74f56f0d', 'gateway-secret')
     const order   = new MyceliumGear.Order(gateway, 18600000, 'ID bd') // Стоимость в satoshy
@@ -56,7 +67,7 @@ class Order extends Component {
 
 
   render() {
-    const {order} = this.state;
+    const {order, color, interior, options} = this.state;
 
     return <div className="page">
         <Headpage mainTitle="Время быть первым" width={widthCar} title="Senat" subTitle="седан">
@@ -72,18 +83,27 @@ class Order extends Component {
           </div>
 
 
-          <table className="orderInfo">
-            <tbody>
-              <tr>
-                <td className="orderInfoLabel">Базовая цена</td>
-                <td className="orderInfoValue">7 850 000 <sub>&#8381;</sub></td>
-              </tr>
-              <tr>
-                <td className="orderInfoLabel">Премиальный пакет</td>
-                <td className="orderInfoValue">750 000 <sub>&#8381;</sub></td>
-              </tr>
-            </tbody>
-          </table>
+
+          <OrderDetails
+            color={getColorName(color)}
+            interior={getInteriorName(interior)}
+            price={this.price}
+            options={options}
+          />
+
+
+          {/*<table className="orderInfo">*/}
+            {/*<tbody>*/}
+              {/*<tr>*/}
+                {/*<td className="orderInfoLabel">Базовая цена</td>*/}
+                {/*<td className="orderInfoValue">7 850 000 <sub>&#8381;</sub></td>*/}
+              {/*</tr>*/}
+              {/*<tr>*/}
+                {/*<td className="orderInfoLabel">Премиальный пакет</td>*/}
+                {/*<td className="orderInfoValue">750 000 <sub>&#8381;</sub></td>*/}
+              {/*</tr>*/}
+            {/*</tbody>*/}
+          {/*</table>*/}
 
           <table className="totalPrice">
             <tbody>

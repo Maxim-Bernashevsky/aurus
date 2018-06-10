@@ -10,7 +10,7 @@ import rose_preview from '../assets/img/interior_rose.jpg';
 import etimoe_preview from '../assets/img/interior_etimoe.jpg';
 import { getPrice, getTextPrice } from '../common/price';
 import OrderDetails from "../components/OrderDetails";
-import {COLORS, COLOR_TEXT, INTERIORS, INTERIOR_TEXT} from '../common/CONSTANTS'
+import {COLORS, INTERIORS, INTERIOR_TEXT, getColorName, getInteriorName} from '../common/CONSTANTS'
 import BlockColors from "../components/BlockColors";
 const widthCar = 820;
 
@@ -68,8 +68,7 @@ class Configurator extends Component {
     .reduce((prev, cur) => prev + cur, 0)
     + this.price.base;
 
-  getColorName = (color) => COLOR_TEXT[Symbol.keyFor(color).toUpperCase()];
-  getInteriorName = (interior) => INTERIOR_TEXT[Symbol.keyFor(interior).toUpperCase()];
+
 
   componentWillMount() {
     this.price = getPrice.senat;
@@ -137,8 +136,8 @@ class Configurator extends Component {
           </div>
 
           <OrderDetails
-            color={this.getColorName(color)}
-            interior={this.getInteriorName(interior)}
+            color={getColorName(color)}
+            interior={getInteriorName(interior)}
             price={this.price}
             options={options}
             onDeleteOption={this.onDeleteOption}

@@ -2,20 +2,27 @@ import React, { Component } from 'react';
 import {getTextPrice} from "../common/price";
 import Title from "./Title"
 import Plus from "./Plus"
+import "./OrderDetails.styl"
+
 
 class OrderDetails extends Component {
   render() {
     const {color, interior, price, options, onDeleteOption, configurator} = this.props;
     return (
       <React.Fragment>
-        <Title text="Cтоимость"/>
+        {configurator && <Title text="Заказ"/>}
 
         <table  className="orderInfo">
           <tbody>
-          <tr className="selectedOptions">
-            <td>{`Цвет: ${color}`}</td>
-            <td>{`Интерьер: ${interior}`}</td>
-          </tr>
+            <tr className="selectedOptions">
+              <td className="orderCarName">Aurus Senat седан</td>
+            </tr>
+            <tr className="selectedOptions">
+              <td>{`Цвет: ${color}`}</td>
+            </tr>
+            <tr className="selectedOptions">
+              <td>{`Интерьер: ${interior}`}</td>
+            </tr>
           </tbody>
         </table>
 
