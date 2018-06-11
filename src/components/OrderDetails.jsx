@@ -7,7 +7,7 @@ import "./OrderDetails.styl"
 
 class OrderDetails extends Component {
   render() {
-    const {color, interior, price, options, onDeleteOption, configurator} = this.props;
+    const {color, interior, price, options, onDeleteOption, configurator, model} = this.props;
     return (
       <React.Fragment>
         {configurator && <Title text="Заказ"/>}
@@ -15,7 +15,7 @@ class OrderDetails extends Component {
         <table  className="orderInfo">
           <tbody>
             <tr className="selectedOptions">
-              <td className="orderCarName">Aurus Senat седан</td>
+              <td className="orderCarName">{model.toUpperCase()}</td>
             </tr>
             <tr className="selectedOptions">
               <td>{`Цвет: ${color}`}</td>

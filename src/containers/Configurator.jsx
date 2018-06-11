@@ -2,24 +2,19 @@ import React, { Component } from 'react';
 import './Configurator.styl';
 import Headpage from "../components/Headpage";
 import Plus from "../components/Plus";
-
 import car from '../assets/img/senat4.png';
 import interior_select from '../assets/img/interior.jpg';
 import oliva_preview from '../assets/img/interior_oliva.jpg';
 import rose_preview from '../assets/img/interior_rose.jpg';
 import etimoe_preview from '../assets/img/interior_etimoe.jpg';
-import { getPrice, getTextPrice } from '../common/price';
+import { getPrice, getTextPrice, getTotalPrice } from '../common/price';
 import OrderDetails from "../components/OrderDetails";
 import {COLORS, INTERIORS, INTERIOR_TEXT, getColorName, getInteriorName, lsOrderKey} from '../common/CONSTANTS'
 import BlockColors from "../components/BlockColors";
 import fb from '../services/firebase';
+import defaultOrder from "../common/defaultOrder"
 const widthCar = 820;
 
-const defaultState = {
-  color: COLORS.BLACK,
-  interior: INTERIORS.OLIVA,
-  options: ['premiumPack'],
-};
 
 const InteriorInput = (props) => {
   const {type, selected, onChange, srcImg} = props;
@@ -46,7 +41,7 @@ class Configurator extends Component {
     this.price = getPrice.senat;
     this.state = {
       base: null,
-      order: defaultState,
+      order: defaultOrder,
       orderID: localStorage.getItem(lsOrderKey)
     };
   }
@@ -59,10 +54,10 @@ class Configurator extends Component {
           if(orderID) {
             return base[orderID]
           }else {
-            const key = fb.child("orders/").push(defaultState).getKey();
+            const key = fb.child("orders/").push(defaultOrder).getKey();
             this.setState({orderID: key})
             localStorage.setItem(lsOrderKey, key);
-            return defaultState
+            return defaultOrder
           }
 
         });
@@ -87,37 +82,28 @@ class Configurator extends Component {
     fb.child(`/orders/${this.state.orderID}/options`).set(updateOptions)
   };
 
-  getTotalPrice = () => {
-    const {base, orderID} = this.state;
-    const options = base[orderID].options;
-    return options ? options
-      .map(option => this.price[option].value)
-      .reduce((prev, cur) => prev + cur, 0)
-    + this.price.base
-    : this.price.base;
-  };
-
   headBlock = () => (
-      <Headpage
-        mainTitle="Исполнение желаний"
+    <Headpage
+      mainTitle="Исполнение желаний"
+      width={widthCar}
+      title="Senat"
+      subTitle="седан"
+    >
+      <img
         width={widthCar}
-        title="Senat"
-        subTitle="седан"
-      >
-        <img
-          width={widthCar}
-          src={car}
-          alt="AURUS Senat"
-          style={{transform: `translate(calc(50% - ${widthCar - 80}px), ${100}px)`}}
-        />
-      </Headpage>
+        src={car}
+        alt="AURUS Senat"
+        style={{transform: `translate(calc(50% - ${widthCar - 80}px), ${100}px)`}}
+      />
+    </Headpage>
   );
 
   render() {
     const {base, orderID} = this.state;
 
     if(!base || !orderID) return (this.headBlock());
-    const {color, interior, options} = base[orderID];
+    const order = base[orderID];
+    const {color, interior, options, model} = order;
 
     return (
       <div className="page configurator">
@@ -157,7 +143,6 @@ class Configurator extends Component {
                 srcImg={etimoe_preview}
               />
             </div>
-
           </div>
 
           <OrderDetails
@@ -166,6 +151,7 @@ class Configurator extends Component {
             price={this.price}
             options={options}
             onDeleteOption={this.onDeleteOption}
+            model={model}
             configurator
           />
 
@@ -180,7 +166,7 @@ class Configurator extends Component {
             <tbody>
             <tr>
               <td className="orderInfoLabel">Итоговая цена</td>
-              <td className="orderInfoValue">{getTextPrice(this.getTotalPrice())} <sub>&#8381;</sub></td>
+              <td className="orderInfoValue">{getTextPrice(getTotalPrice(order))} <sub>&#8381;</sub></td>
             </tr>
             </tbody>
           </table>

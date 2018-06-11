@@ -34,4 +34,12 @@ export const getTextPrice = (price) =>
     ).reverse()
     .join(" ");
 
-
+export const getTotalPrice = (order) => {
+  const { model, options } = order;
+  console.dir(order)
+  return options ? options
+      .map(option => getPrice[model][option].value)
+      .reduce((prev, cur) => prev + cur, 0)
+    + getPrice[model].base
+    : getPrice[model].base;
+};

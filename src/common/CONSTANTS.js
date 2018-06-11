@@ -26,5 +26,11 @@ export const INTERIOR_TEXT = Object.freeze({
   ETIMOE: "Дерево этимое"
 });
 
+export const MODELS = Object.freeze({
+  SENAT: "senat",
+  ARSENAL: "arsenal",
+  COMENDANT: "comendant"
+});
+
 export const getColorName = (color) => COLOR_TEXT[color.toUpperCase()];
 export const getInteriorName = (interior) => INTERIOR_TEXT[interior.toUpperCase()];
