@@ -4,6 +4,7 @@ import Loadable from "react-loadable";
 const LoadingComponent = () => (<h1>Loading...</h1>);
 
 module.exports = {
+  LoadingComponent: LoadingComponent,
   Header: Loadable({
     loader: () => import(/* webpackChunkName: "header" */ '../components/Header'),
     loading: LoadingComponent,

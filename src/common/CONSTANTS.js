@@ -1,8 +1,10 @@
+
+
 export const COLORS = Object.freeze({
-  BLACK:   Symbol.for("black"),
-  WHITE:  Symbol.for("white"),
-  BLUE: Symbol.for("blue"),
-  RED: Symbol.for("red")
+  BLACK: "black",
+  WHITE: "white",
+  BLUE: "blue",
+  RED: "red"
 });
 
 export const COLOR_TEXT = Object.freeze({
@@ -13,9 +15,9 @@ export const COLOR_TEXT = Object.freeze({
 });
 
 export const INTERIORS = Object.freeze({
-  OLIVA: Symbol.for("oliva"),
-  ROSE: Symbol.for("rose"),
-  ETIMOE: Symbol.for("etimoe")
+  OLIVA: "oliva",
+  ROSE: "rose",
+  ETIMOE: "etimoe"
 });
 
 export const INTERIOR_TEXT = Object.freeze({
@@ -24,6 +26,5 @@ export const INTERIOR_TEXT = Object.freeze({
   ETIMOE: "Дерево этимое"
 });
 
-
-export const getColorName = (color) => COLOR_TEXT[Symbol.keyFor(color).toUpperCase()];
-export const getInteriorName = (interior) => INTERIOR_TEXT[Symbol.keyFor(interior).toUpperCase()];
+export const getColorName = (color) => COLOR_TEXT[color.toUpperCase()];
+export const getInteriorName = (interior) => INTERIOR_TEXT[interior.toUpperCase()];

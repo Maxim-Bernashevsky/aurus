@@ -35,6 +35,8 @@ class Order extends Component {
 
   componentWillMount(){
     this.price = getPrice.senat;
+
+
     this.setState({
       color: COLORS.BLACK,
       interior: INTERIORS.OLIVA,

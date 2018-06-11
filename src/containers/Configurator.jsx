@@ -10,10 +10,17 @@ import rose_preview from '../assets/img/interior_rose.jpg';
 import etimoe_preview from '../assets/img/interior_etimoe.jpg';
 import { getPrice, getTextPrice } from '../common/price';
 import OrderDetails from "../components/OrderDetails";
+import {LoadingComponent} from "../containers/AsyncComponent"
 import {COLORS, INTERIORS, INTERIOR_TEXT, getColorName, getInteriorName} from '../common/CONSTANTS'
 import BlockColors from "../components/BlockColors";
+import fb from '../common/firebase';
 const widthCar = 820;
 
+const defaultState = {
+  color: COLORS.BLACK,
+  interior: INTERIORS.OLIVA,
+  options: ['premiumPack'],
+};
 
 const InteriorInput = (props) => {
   const {type, selected, onChange, srcImg} = props;
@@ -37,9 +44,8 @@ class Configurator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: COLORS.BLACK,
-      interior: INTERIORS.OLIVA,
-      options: ['premiumPack'],
+      base: null,
+      order: defaultState
     };
   }
 
@@ -59,27 +65,45 @@ class Configurator extends Component {
 
   onDeleteOption = (deleteOption) => {
     this.setState({
-      options: this.state.options.filter(option => option !== deleteOption),
+      options: this.state.order.options.filter(option => option !== deleteOption),
     });
   };
 
-  getTotalPrice = () => this.state.options
+  getTotalPrice = () => this.state.order.options
     .map(option => this.price[option].value)
     .reduce((prev, cur) => prev + cur, 0)
     + this.price.base;
 
 
-
   componentWillMount() {
     this.price = getPrice.senat;
+
+    fb.on("value", snapshot => {
+        this.setState({base: snapshot.val().test});
+      },
+      error => console.log("Error: " + error.code)
+    );
   }
 
-  updateOrder() {
-    // TODO
-  }
+
+  getOrder = () => {
+    const orderPresaved = localStorage.getItem("orderAU");
+    const { base } = this.state;
+
+    if(orderPresaved) {
+      return base[orderPresaved]
+    }
+
+    const ref = fb.child("test/");
+    const key = ref.push(defaultState).getKey();
+    localStorage.setItem("orderAU", key);
+    return defaultState
+  };
 
   render() {
-    const { color, interior, options } = this.state;
+    if(!this.state.base) return (<LoadingComponent/>);
+
+    const {color, interior, options} = this.getOrder();
     return (
       <div className="page configurator">
 
@@ -98,6 +122,7 @@ class Configurator extends Component {
         </Headpage>
 
         <div className="bodyPage">
+
 
           <BlockColors
             color={color}
