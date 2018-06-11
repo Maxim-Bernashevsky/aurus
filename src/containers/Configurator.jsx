@@ -13,7 +13,6 @@ import OrderDetails from "../components/OrderDetails";
 import {COLORS, INTERIORS, INTERIOR_TEXT, getColorName, getInteriorName, lsOrderKey} from '../common/CONSTANTS'
 import BlockColors from "../components/BlockColors";
 import fb from '../services/firebase';
-import Header from '../components/Header';
 const widthCar = 820;
 
 const defaultState = {
@@ -79,21 +78,24 @@ class Configurator extends Component {
 
   onChangeInterior = (e) => {
     const newInterior = e.target.parentNode.className.toUpperCase();
-    this.setState({
-      interior: INTERIORS[newInterior]
-    })
+    fb.child(`/orders/${this.state.orderID}/interior`).set(INTERIORS[newInterior])
   };
 
   onDeleteOption = (deleteOption) => {
-    this.setState({
-      options: this.state.order.options.filter(option => option !== deleteOption),
-    });
+    const {base, orderID} = this.state;
+    const updateOptions = base[orderID].options.filter(option => option !== deleteOption);
+    fb.child(`/orders/${this.state.orderID}/options`).set(updateOptions)
   };
 
-  getTotalPrice = () => this.state.order.options
-    .map(option => this.price[option].value)
-    .reduce((prev, cur) => prev + cur, 0)
-    + this.price.base;
+  getTotalPrice = () => {
+    const {base, orderID} = this.state;
+    const options = base[orderID].options;
+    return options ? options
+      .map(option => this.price[option].value)
+      .reduce((prev, cur) => prev + cur, 0)
+    + this.price.base
+    : this.price.base;
+  };
 
   headBlock = () => (
       <Headpage

@@ -6,6 +6,8 @@ import {
   Redirect
 } from 'react-router-dom';
 
+const mobyleDisplay = window.innerWidth < 400;
+
 import Loadable from 'react-loadable';
 // import AsyncComponent from "./AsyncComponent";
 const LoadingComponent = () => (<h1>Loading...</h1>);
@@ -39,7 +41,7 @@ const RouteWithFooter = () => (
   </React.Fragment>
 );
 
-const Routers = () => (
+const Routers = () => mobyleDisplay ? <div>Mobile version in development...</div> : (
   <Router basename={basename}>
     <React.Fragment>
       <Header />
