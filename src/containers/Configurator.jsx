@@ -10,10 +10,10 @@ import rose_preview from '../assets/img/interior_rose.jpg';
 import etimoe_preview from '../assets/img/interior_etimoe.jpg';
 import { getPrice, getTextPrice } from '../common/price';
 import OrderDetails from "../components/OrderDetails";
-import {LoadingComponent} from "../containers/AsyncComponent"
-import {COLORS, INTERIORS, INTERIOR_TEXT, getColorName, getInteriorName} from '../common/CONSTANTS'
+import {COLORS, INTERIORS, INTERIOR_TEXT, getColorName, getInteriorName, lsOrderKey} from '../common/CONSTANTS'
 import BlockColors from "../components/BlockColors";
-import fb from '../common/firebase';
+import fb from '../services/firebase';
+import Header from '../components/Header';
 const widthCar = 820;
 
 const defaultState = {
@@ -43,17 +43,38 @@ const InteriorInput = (props) => {
 class Configurator extends Component {
   constructor(props) {
     super(props);
+
+    this.price = getPrice.senat;
     this.state = {
       base: null,
-      order: defaultState
+      order: defaultState,
+      orderID: localStorage.getItem(lsOrderKey)
     };
+  }
+
+  componentWillMount() {
+    fb.on("value", snapshot => {
+        this.setState({base: snapshot.val().orders}, () => {
+
+          const { base, orderID } = this.state;
+          if(orderID) {
+            return base[orderID]
+          }else {
+            const key = fb.child("orders/").push(defaultState).getKey();
+            this.setState({orderID: key})
+            localStorage.setItem(lsOrderKey, key);
+            return defaultState
+          }
+
+        });
+      },
+      error => console.log("Error: " + error.code)
+    );
   }
 
   onChangeColor = (e) => {
     const newColor = e.target.parentNode.className.toUpperCase();
-    this.setState({
-      color: COLORS[newColor]
-    })
+    fb.child(`/orders/${this.state.orderID}/color`).set(COLORS[newColor])
   };
 
   onChangeInterior = (e) => {
@@ -74,56 +95,33 @@ class Configurator extends Component {
     .reduce((prev, cur) => prev + cur, 0)
     + this.price.base;
 
-
-  componentWillMount() {
-    this.price = getPrice.senat;
-
-    fb.on("value", snapshot => {
-        this.setState({base: snapshot.val().test});
-      },
-      error => console.log("Error: " + error.code)
-    );
-  }
-
-
-  getOrder = () => {
-    const orderPresaved = localStorage.getItem("orderAU");
-    const { base } = this.state;
-
-    if(orderPresaved) {
-      return base[orderPresaved]
-    }
-
-    const ref = fb.child("test/");
-    const key = ref.push(defaultState).getKey();
-    localStorage.setItem("orderAU", key);
-    return defaultState
-  };
+  headBlock = () => (
+      <Headpage
+        mainTitle="Исполнение желаний"
+        width={widthCar}
+        title="Senat"
+        subTitle="седан"
+      >
+        <img
+          width={widthCar}
+          src={car}
+          alt="AURUS Senat"
+          style={{transform: `translate(calc(50% - ${widthCar - 80}px), ${100}px)`}}
+        />
+      </Headpage>
+  );
 
   render() {
-    if(!this.state.base) return (<LoadingComponent/>);
+    const {base, orderID} = this.state;
 
-    const {color, interior, options} = this.getOrder();
+    if(!base || !orderID) return (this.headBlock());
+    const {color, interior, options} = base[orderID];
+
     return (
       <div className="page configurator">
-
-        <Headpage
-          mainTitle="Исполнение желаний"
-          width={widthCar}
-          title="Senat"
-          subTitle="седан"
-        >
-          <img
-            width={widthCar}
-            src={car}
-            alt="AURUS Senat"
-            style={{transform: `translate(calc(50% - ${widthCar - 80}px), ${100}px)`}}
-          />
-        </Headpage>
+        {this.headBlock()}
 
         <div className="bodyPage">
-
-
           <BlockColors
             color={color}
             onChangeColor={this.onChangeColor}

@@ -1,4 +1,4 @@
-
+export const lsOrderKey = "orderAU";
 
 export const COLORS = Object.freeze({
   BLACK: "black",
