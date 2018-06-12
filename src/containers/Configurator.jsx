@@ -69,17 +69,20 @@ class Configurator extends Component {
   onChangeColor = (e) => {
     const newColor = e.target.parentNode.className.toUpperCase();
     fb.child(`/orders/${this.state.orderID}/color`).set(COLORS[newColor])
+      .then(this.updateOrderSession)
   };
 
   onChangeInterior = (e) => {
     const newInterior = e.target.parentNode.className.toUpperCase();
     fb.child(`/orders/${this.state.orderID}/interior`).set(INTERIORS[newInterior])
+      .then(this.updateOrderSession)
   };
 
   onDeleteOption = (deleteOption) => {
     const {base, orderID} = this.state;
     const updateOptions = base[orderID].options.filter(option => option !== deleteOption);
     fb.child(`/orders/${this.state.orderID}/options`).set(updateOptions)
+      .then(this.updateOrderSession)
   };
 
   headBlock = () => (
@@ -97,6 +100,11 @@ class Configurator extends Component {
       />
     </Headpage>
   );
+
+  updateOrderSession = () => {
+    const {base, orderID} = this.state;
+    sessionStorage.setItem(lsOrderKey, JSON.stringify(base[orderID]))
+  };
 
   render() {
     const {base, orderID} = this.state;
