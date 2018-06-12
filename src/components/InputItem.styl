@@ -1,5 +1,16 @@
 @import "../assets/styles/"
 
+_input()
+  background: transparent
+  font-weight: normal
+  border none
+  border-bottom: 1px solid _black
+  position: relative
+  line-height: 34px
+  min-width: 278px
+  padding: 0 10px
+  font-size: _titleSize
+
 .formItem
   margin: 0 15px
   display: inline-block
@@ -12,6 +23,7 @@
     padding: 0 10px
     line-height: 32px
     color _gray
+    font-size: _titleSize
     left: 0
     top: 0
     z-index: -1
@@ -20,12 +32,12 @@
       font-weight: bold
       font-size 12px
       line-height: 12px
-      top: -1px
+      top: -7px
       color _gray
   input
-    border none
-    border-bottom: 1px solid _black
-    line-height: 32px
-    min-width: 278px
-    background: transparent
-    padding: 0 10px
+    _input()
+
+select.item
+  _input()
+  option
+    font-size: _titleSize

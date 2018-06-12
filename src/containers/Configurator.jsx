@@ -11,10 +11,10 @@ import { getPrice, getTextPrice, getTotalPrice } from '../common/price';
 import OrderDetails from "../components/OrderDetails";
 import {COLORS, INTERIORS, INTERIOR_TEXT, getColorName, getInteriorName, lsOrderKey} from '../common/CONSTANTS'
 import BlockColors from "../components/BlockColors";
+import Button from "../components/Button";
 import fb from '../services/firebase';
 import defaultOrder from "../common/defaultOrder"
 const widthCar = 820;
-import classNames from "classnames";
 import InputItem from "../components/InputItem";
 
 
@@ -46,7 +46,8 @@ class Configurator extends Component {
       order: defaultOrder,
       orderID: localStorage.getItem(lsOrderKey),
       name: "",
-      email: ""
+      email: "",
+      payOption: ""
     };
   }
 
@@ -112,14 +113,13 @@ class Configurator extends Component {
 
   onChangeInput = (e) => {
     const {name, value} = e.target;
-    console.dir(name)
     this.setState({
       [name]: value
     })
   };
 
   render() {
-    const {base, orderID, name, email} = this.state;
+    const {base, orderID, name, email, payOption} = this.state;
 
     if(!base || !orderID) return (this.headBlock());
     const order = base[orderID];
@@ -127,25 +127,6 @@ class Configurator extends Component {
 
     return (
       <div className="page configurator">
-        <div className="customerForm">
-          <hr/>
-          TODO
-          <form>
-            <InputItem
-              name= "name"
-              value={name}
-              label={"Имя"}
-              onChange={this.onChangeInput}
-            />
-            <InputItem
-              name= "email"
-              value={email}
-              label={"Email"}
-              onChange={this.onChangeInput}
-            />
-          </form>
-          <hr/>
-        </div>
 
         {this.headBlock()}
 
@@ -211,7 +192,31 @@ class Configurator extends Component {
             </tbody>
           </table>
 
-          {/*TODO*/}
+          <div className="customerForm">
+            <form>
+              <InputItem
+                name= "name"
+                value={name}
+                label={"Имя"}
+                onChange={this.onChangeInput}
+              />
+              <InputItem
+                name= "email"
+                value={email}
+                label={"Email"}
+                onChange={this.onChangeInput}
+              />
+              <InputItem
+                type="select"
+                name= "payOption"
+                options={['Способ оплаты', 'bitcoin', 'visa']}
+                selected={payOption}
+                onChange={this.onChangeInput}
+              />
+
+              <Button text="Оплатить" to="/order"/>
+            </form>
+          </div>
 
         </div>
       </div>
