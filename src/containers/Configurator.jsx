@@ -14,6 +14,8 @@ import BlockColors from "../components/BlockColors";
 import fb from '../services/firebase';
 import defaultOrder from "../common/defaultOrder"
 const widthCar = 820;
+import classNames from "classnames";
+import InputItem from "../components/InputItem";
 
 
 const InteriorInput = (props) => {
@@ -42,7 +44,9 @@ class Configurator extends Component {
     this.state = {
       base: null,
       order: defaultOrder,
-      orderID: localStorage.getItem(lsOrderKey)
+      orderID: localStorage.getItem(lsOrderKey),
+      name: "",
+      email: ""
     };
   }
 
@@ -106,8 +110,16 @@ class Configurator extends Component {
     sessionStorage.setItem(lsOrderKey, JSON.stringify(base[orderID]))
   };
 
+  onChangeInput = (e) => {
+    const {name, value} = e.target;
+    console.dir(name)
+    this.setState({
+      [name]: value
+    })
+  };
+
   render() {
-    const {base, orderID} = this.state;
+    const {base, orderID, name, email} = this.state;
 
     if(!base || !orderID) return (this.headBlock());
     const order = base[orderID];
@@ -115,6 +127,26 @@ class Configurator extends Component {
 
     return (
       <div className="page configurator">
+        <div className="customerForm">
+          <hr/>
+          TODO
+          <form>
+            <InputItem
+              name= "name"
+              value={name}
+              label={"Имя"}
+              onChange={this.onChangeInput}
+            />
+            <InputItem
+              name= "email"
+              value={email}
+              label={"Email"}
+              onChange={this.onChangeInput}
+            />
+          </form>
+          <hr/>
+        </div>
+
         {this.headBlock()}
 
         <div className="bodyPage">
@@ -179,16 +211,7 @@ class Configurator extends Component {
             </tbody>
           </table>
 
-          <div className="customerForm">
-            <hr/>
-            TODO
-            <form>
-              <input type="text"/>
-              <input type="text"/>
-              <input type="text"/>
-            </form>
-            <hr/>
-          </div>
+          {/*TODO*/}
 
         </div>
       </div>

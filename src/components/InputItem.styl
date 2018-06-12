@@ -1,0 +1,31 @@
+@import "../assets/styles/"
+
+.formItem
+  margin: 0 15px
+  display: inline-block
+  position: relative
+  label
+    position: absolute
+    display: inline-block
+    width: 100%
+    text-align: left
+    padding: 0 10px
+    line-height: 32px
+    color _gray
+    left: 0
+    top: 0
+    z-index: -1
+    transition line-height .12s linear
+    &.inputFill
+      font-weight: bold
+      font-size 12px
+      line-height: 12px
+      top: -1px
+      color _gray
+  input
+    border none
+    border-bottom: 1px solid _black
+    line-height: 32px
+    min-width: 278px
+    background: transparent
+    padding: 0 10px
