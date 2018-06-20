@@ -49,7 +49,6 @@ class Order extends Component {
       fb.on("value", snapshot => {
           const orderID = localStorage.getItem(lsOrderKey);
           this.configuratorData = snapshot.val().orders[orderID];
-          console.log(this.configuratorData);
         },
         error => console.log("Error: " + error.code)
       );
@@ -147,7 +146,7 @@ class Order extends Component {
                 </div>
 
                 <Websocket
-                  url='ws://gateway.gear.mycelium.com/gateways/b0f513c8efd69075750b8c55b5b64f1a356ad05e83d2db22eac3e4cf74f56f0d/orders/111/websocket'
+                  url='wss:/gateway.gear.mycelium.com/gateways/b0f513c8efd69075750b8c55b5b64f1a356ad05e83d2db22eac3e4cf74f56f0d/orders/111/websocket'
                   onMessage={this.onUpdateOrder.bind(this)}
                 />
               </div>
